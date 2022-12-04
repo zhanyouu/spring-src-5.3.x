@@ -296,8 +296,8 @@ to serialize only a subset of the object properties, as the following example sh
 
 [source,java,indent=0,subs="verbatim,quotes"]
 ----
-	MappingJacksonValue value = new MappingJacksonValue(new User("eric", "7!jd#h23"));
-	value.setSerializationView(User.WithoutPasswordView.class);
+	MappingJacksonValue value = new MappingJacksonValue(new entity("eric", "7!jd#h23"));
+	value.setSerializationView(entity.WithoutPasswordView.class);
 
 	RequestEntity<MappingJacksonValue> requestEntity =
 		RequestEntity.post(new URI("https://example.com/user")).body(value);

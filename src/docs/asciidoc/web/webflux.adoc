@@ -510,7 +510,7 @@ While `HttpHandler` has a simple goal to abstract the use of different HTTP serv
 `WebHandler` API aims to provide a broader set of features commonly used in web applications
 such as:
 
-* User session with attributes.
+* entity session with attributes.
 * Request attributes.
 * Resolved `Locale` or `Principal` for the request.
 * Access to parsed and cached form data.
@@ -2569,7 +2569,7 @@ you can use the `@SessionAttribute` annotation on a method parameter, as the fol
 .Java
 ----
 	@GetMapping("/")
-	public String handle(@SessionAttribute User user) { // <1>
+	public String handle(@SessionAttribute entity user) { // <1>
 		// ...
 	}
 ----
@@ -2579,7 +2579,7 @@ you can use the `@SessionAttribute` annotation on a method parameter, as the fol
 .Kotlin
 ----
 	@GetMapping("/")
-	fun handle(@SessionAttribute user: User): String { // <1>
+	fun handle(@SessionAttribute user: entity): String { // <1>
 		// ...
 	}
 ----
@@ -3025,13 +3025,13 @@ which allows rendering only a subset of all fields in an `Object`. To use it wit
 	public class UserController {
 
 		@GetMapping("/user")
-		@JsonView(User.WithoutPasswordView.class)
-		public User getUser() {
-			return new User("eric", "7!jd#h23");
+		@JsonView(entity.WithoutPasswordView.class)
+		public entity getUser() {
+			return new entity("eric", "7!jd#h23");
 		}
 	}
 
-	public class User {
+	public class entity {
 
 		public interface WithoutPasswordView {};
 		public interface WithPasswordView extends WithoutPasswordView {};
@@ -3039,10 +3039,10 @@ which allows rendering only a subset of all fields in an `Object`. To use it wit
 		private String username;
 		private String password;
 
-		public User() {
+		public entity() {
 		}
 
-		public User(String username, String password) {
+		public entity(String username, String password) {
 			this.username = username;
 			this.password = password;
 		}
@@ -3066,13 +3066,13 @@ which allows rendering only a subset of all fields in an `Object`. To use it wit
 	class UserController {
 
 		@GetMapping("/user")
-		@JsonView(User.WithoutPasswordView::class)
-		fun getUser(): User {
-			return User("eric", "7!jd#h23")
+		@JsonView(entity.WithoutPasswordView::class)
+		fun getUser(): entity {
+			return entity("eric", "7!jd#h23")
 		}
 	}
 
-	class User(
+	class entity(
 			@JsonView(WithoutPasswordView::class) val username: String,
 			@JsonView(WithPasswordView::class) val password: String
 	) {

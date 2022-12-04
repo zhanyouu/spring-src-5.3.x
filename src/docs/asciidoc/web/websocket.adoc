@@ -1820,7 +1820,7 @@ that ensures the user's HTTP session does not expire while the WebSocket session
 
 
 [[websocket-stomp-user-destination]]
-=== User Destinations
+=== entity Destinations
 
 An application can send messages that target a specific user, and Spring's STOMP support
 recognizes destinations prefixed with `/user/` for this purpose.

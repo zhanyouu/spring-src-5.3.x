@@ -5456,7 +5456,7 @@ a Hibernate-based `UserRepository`:
 			// track initial state in test database:
 			final int count = countRowsInTable("user");
 
-			User user = new User(...);
+			entity user = new entity(...);
 			repository.save(user);
 
 			// Manual flush is required to avoid false positive in test
@@ -5499,7 +5499,7 @@ a Hibernate-based `UserRepository`:
 			// track initial state in test database:
 			val count = countRowsInTable("user")
 
-			val user = User()
+			val user = entity()
 			repository.save(user)
 
 			// Manual flush is required to avoid false positive in test

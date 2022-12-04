@@ -2911,7 +2911,7 @@ as the following example shows:
 .Java
 ----
 	@RequestMapping("/")
-	public String handle(@SessionAttribute User user) { <1>
+	public String handle(@SessionAttribute entity user) { <1>
 		// ...
 	}
 ----
@@ -2921,7 +2921,7 @@ as the following example shows:
 .Kotlin
 ----
 	@RequestMapping("/")
-	fun handle(@SessionAttribute user: User): String { // <1>
+	fun handle(@SessionAttribute user: entity): String { // <1>
 		// ...
 	}
 ----
@@ -3430,13 +3430,13 @@ which allow rendering only a subset of all fields in an `Object`. To use it with
 	public class UserController {
 
 		@GetMapping("/user")
-		@JsonView(User.WithoutPasswordView.class)
-		public User getUser() {
-			return new User("eric", "7!jd#h23");
+		@JsonView(entity.WithoutPasswordView.class)
+		public entity getUser() {
+			return new entity("eric", "7!jd#h23");
 		}
 	}
 
-	public class User {
+	public class entity {
 
 		public interface WithoutPasswordView {};
 		public interface WithPasswordView extends WithoutPasswordView {};
@@ -3444,10 +3444,10 @@ which allow rendering only a subset of all fields in an `Object`. To use it with
 		private String username;
 		private String password;
 
-		public User() {
+		public entity() {
 		}
 
-		public User(String username, String password) {
+		public entity(String username, String password) {
 			this.username = username;
 			this.password = password;
 		}
@@ -3470,11 +3470,11 @@ which allow rendering only a subset of all fields in an `Object`. To use it with
 	class UserController {
 
 		@GetMapping("/user")
-		@JsonView(User.WithoutPasswordView::class)
-		fun getUser() = User("eric", "7!jd#h23")
+		@JsonView(entity.WithoutPasswordView::class)
+		fun getUser() = entity("eric", "7!jd#h23")
 	}
 
-	class User(
+	class entity(
 			@JsonView(WithoutPasswordView::class) val username: String,
 			@JsonView(WithPasswordView::class) val password: String) {
 
@@ -3497,9 +3497,9 @@ wrap the return value with `MappingJacksonValue` and use it to supply the serial
 
 		@GetMapping("/user")
 		public MappingJacksonValue getUser() {
-			User user = new User("eric", "7!jd#h23");
+			entity user = new entity("eric", "7!jd#h23");
 			MappingJacksonValue value = new MappingJacksonValue(user);
-			value.setSerializationView(User.WithoutPasswordView.class);
+			value.setSerializationView(entity.WithoutPasswordView.class);
 			return value;
 		}
 	}
@@ -3512,8 +3512,8 @@ wrap the return value with `MappingJacksonValue` and use it to supply the serial
 
 		@GetMapping("/user")
 		fun getUser(): MappingJacksonValue {
-			val value = MappingJacksonValue(User("eric", "7!jd#h23"))
-			value.serializationView = User.WithoutPasswordView::class.java
+			val value = MappingJacksonValue(entity("eric", "7!jd#h23"))
+			value.serializationView = entity.WithoutPasswordView::class.java
 			return value
 		}
 	}
@@ -3530,8 +3530,8 @@ to the model, as the following example shows:
 
 		@GetMapping("/user")
 		public String getUser(Model model) {
-			model.addAttribute("user", new User("eric", "7!jd#h23"));
-			model.addAttribute(JsonView.class.getName(), User.WithoutPasswordView.class);
+			model.addAttribute("user", new entity("eric", "7!jd#h23"));
+			model.addAttribute(JsonView.class.getName(), entity.WithoutPasswordView.class);
 			return "userView";
 		}
 	}
@@ -3546,8 +3546,8 @@ to the model, as the following example shows:
 
 		@GetMapping("/user")
 		fun getUser(model: Model): String {
-			model["user"] = User("eric", "7!jd#h23")
-			model[JsonView::class.qualifiedName] = User.WithoutPasswordView::class.java
+			model["user"] = entity("eric", "7!jd#h23")
+			model[JsonView::class.qualifiedName] = entity.WithoutPasswordView::class.java
 			return "userView"
 		}
 	}
