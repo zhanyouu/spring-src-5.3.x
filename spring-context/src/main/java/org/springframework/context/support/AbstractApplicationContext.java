@@ -547,39 +547,71 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 			StartupStep contextRefresh = this.applicationStartup.start("spring.context.refresh");
 
 			// Prepare this context for refreshing.
+			/**
+			 * 创建Environment
+			 */
 			prepareRefresh();
-
+			/**
+			 * 创建beanFactory
+			 */
 			// Tell the subclass to refresh the internal bean factory.
 			ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
 
 			// Prepare the bean factory for use in this context.
+			/**
+			 * 设置beanFactory中的的属性
+			 */
 			prepareBeanFactory(beanFactory);
 
 			try {
 				// Allows post-processing of the bean factory in context subclasses.
+				/**
+				 * 这是一个空方法，留给子类去实现
+				 */
 				postProcessBeanFactory(beanFactory);
 
 				StartupStep beanPostProcess = this.applicationStartup.start("spring.context.beans.post-process");
 				// Invoke factory processors registered as beans in the context.
+				/**
+				 * 调用所有beanFactoryPostProcessors#postProcessBeanFactory()方法
+				 */
 				invokeBeanFactoryPostProcessors(beanFactory);
 
 				// Register bean processors that intercept bean creation.
+				/**
+				 * 注册beanPostProcessors
+				 */
 				registerBeanPostProcessors(beanFactory);
 				beanPostProcess.end();
 
 				// Initialize message source for this context.
+				/**
+				 * 国际化的功能
+				 */
 				initMessageSource();
 
 				// Initialize event multicaster for this context.
+				/**
+				 * 初始化事件广播器
+				 */
 				initApplicationEventMulticaster();
 
 				// Initialize other special beans in specific context subclasses.
+				/**
+				 * 这是一个空方法，留给子类去实现
+				 */
 				onRefresh();
 
 				// Check for listener beans and register them.
+				/**
+				 * 注册监听器，接受事件
+				 */
 				registerListeners();
 
 				// Instantiate all remaining (non-lazy-init) singletons.
+				/**
+				 * 实例化剩余的非懒加载的单例bean
+				 */
 				finishBeanFactoryInitialization(beanFactory);
 
 				// Last step: publish corresponding event.
@@ -668,6 +700,9 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * @see #getBeanFactory()
 	 */
 	protected ConfigurableListableBeanFactory obtainFreshBeanFactory() {
+		/**
+		 * 创建DefaultListableBeanFactory,如果已经有了BeanFactory就destroy,否则new一个你的BeanFactory
+		 */
 		refreshBeanFactory();
 		return getBeanFactory();
 	}
@@ -743,6 +778,9 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * <p>Must be called before singleton instantiation.
 	 */
 	protected void invokeBeanFactoryPostProcessors(ConfigurableListableBeanFactory beanFactory) {
+		/**
+		 * 调用所有beanFactoryPostProcessor#postProcessBeanFactory()方法
+		 */
 		PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(beanFactory, getBeanFactoryPostProcessors());
 
 		// Detect a LoadTimeWeaver and prepare for weaving, if found in the meantime
@@ -915,6 +953,9 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		beanFactory.freezeConfiguration();
 
 		// Instantiate all remaining (non-lazy-init) singletons.
+		/**
+		 * 实例化剩余的非懒加载的单例bean
+		 */
 		beanFactory.preInstantiateSingletons();
 	}
 

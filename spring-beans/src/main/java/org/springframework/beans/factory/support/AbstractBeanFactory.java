@@ -205,6 +205,9 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 
 	@Override
 	public Object getBean(String name) throws BeansException {
+		/**
+		 * 获取bean对象的实际动作
+		 */
 		return doGetBean(name, null, null, false);
 	}
 
@@ -371,6 +374,9 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 						Object scopedInstance = scope.get(beanName, () -> {
 							beforePrototypeCreation(beanName);
 							try {
+								/**
+								 * 创建bean对象
+								 */
 								return createBean(beanName, mbd, args);
 							}
 							finally {
