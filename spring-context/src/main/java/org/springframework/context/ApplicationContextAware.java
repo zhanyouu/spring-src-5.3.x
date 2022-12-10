@@ -56,8 +56,8 @@ import org.springframework.beans.factory.Aware;
  * @see org.springframework.context.support.ApplicationObjectSupport
  * @see org.springframework.beans.factory.BeanFactoryAware
  */
+//通过实现ApplicationContextAware接口，可以在bean对象初始化的时候为容器对象赋值；目前也可以通过@Autowired注解实现
 public interface ApplicationContextAware extends Aware {
-
 	/**
 	 * Set the ApplicationContext that this object runs in.
 	 * Normally this call will be used to initialize the object.

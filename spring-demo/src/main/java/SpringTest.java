@@ -1,8 +1,7 @@
-import config.UserConfig;
+import cicle.A;
+import cicle.B;
 import entity.Person;
-import entity.User;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class SpringTest {
@@ -12,8 +11,10 @@ public class SpringTest {
 //				UserConfig.class);
 //		User user = (User) context.getBean("user");
 //		System.out.println(user);
-		ApplicationContext xmlContext = new ClassPathXmlApplicationContext("person.xml");
-		Person person = (Person) xmlContext.getBean("person");
-		System.out.println(person);
+		ApplicationContext xmlContext = new ClassPathXmlApplicationContext("demo.xml");
+		A a = (A) xmlContext.getBean("a");
+		B b = (B) xmlContext.getBean("b");
+		System.out.println(a);
+		System.out.println(b);
 	}
 }

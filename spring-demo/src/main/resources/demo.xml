@@ -4,10 +4,16 @@
 		xmlns:context="http://www.springframework.org/schema/context"
 		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 <!--	引入配置文件-->
-	<context:property-placeholder location="classpath:application.properties"></context:property-placeholder>
+<!--	<context:property-placeholder location="classpath:application.properties"></context:property-placeholder>-->
 <!--	定义bean对象-->
-	<bean id="person" class="entity.Person">
-		<property name="name" value="${person.name}" />
-		<property name="age" value="${person.age}" />
+<!--	<bean id="person" class="entity.Person">-->
+<!--		<property name="name" value="${person.name}" />-->
+<!--		<property name="age" value="${person.age}" />-->
+<!--	</bean>-->
+	<bean id="a" class="cicle.A">
+		<property name="b" ref="b"/>
+	</bean>
+	<bean id="b" class="cicle.B">
+		<property name="a" ref="a"/>
 	</bean>
 </beans>

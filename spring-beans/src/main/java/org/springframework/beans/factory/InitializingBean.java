@@ -31,6 +31,7 @@ package org.springframework.beans.factory;
  * @see org.springframework.beans.factory.config.BeanDefinition#getPropertyValues()
  * @see org.springframework.beans.factory.support.AbstractBeanDefinition#getInitMethodName()
  */
+//用户最后一次可以修改容器bean的内容
 public interface InitializingBean {
 
 	/**

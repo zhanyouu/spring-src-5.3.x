@@ -38,6 +38,7 @@ import org.springframework.beans.BeansException;
  * @see InitializingBean
  * @see org.springframework.context.ApplicationContextAware
  */
+//通过实现BeanFactoryAware接口，可以在bean对象初始化的时候为容器对象赋值；目前也可以通过@Autowired注解实现
 public interface BeanFactoryAware extends Aware {
 
 	/**

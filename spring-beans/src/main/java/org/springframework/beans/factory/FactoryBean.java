@@ -62,6 +62,7 @@ import org.springframework.lang.Nullable;
  * @see org.springframework.aop.framework.ProxyFactoryBean
  * @see org.springframework.jndi.JndiObjectFactoryBean
  */
+//用户可以不走spring标准的流程来生成对象，可以通过，反射，new等方式生成。
 public interface FactoryBean<T> {
 
 	/**

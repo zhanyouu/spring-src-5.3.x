@@ -76,6 +76,7 @@ import org.springframework.util.ReflectionUtils;
  * @see #setInitAnnotationType
  * @see #setDestroyAnnotationType
  */
+//@PostConstruct,@PreDestroy
 @SuppressWarnings("serial")
 public class InitDestroyAnnotationBeanPostProcessor
 		implements DestructionAwareBeanPostProcessor, MergedBeanDefinitionPostProcessor, PriorityOrdered, Serializable {
