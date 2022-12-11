@@ -208,6 +208,9 @@ public abstract class BeanUtils {
 						argsWithDefaultValues[i] = args[i];
 					}
 				}
+				/**
+				 * 通过构造函数进行实例化
+				 */
 				return ctor.newInstance(argsWithDefaultValues);
 			}
 		}

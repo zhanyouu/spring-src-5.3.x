@@ -339,6 +339,9 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 				 * 单例模式
 				 */
 				if (mbd.isSingleton()) {
+					/**
+					 * 获取bean实例
+					 */
 					sharedInstance = getSingleton(beanName, () -> {
 						try {
 							/**
